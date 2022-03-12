@@ -1,4 +1,5 @@
 ﻿using Database;
+using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace WinFormsApp.Forms
 		{
 			InitializeComponent();
 
+			var currentDate = DateTime.Now;
 			AddColumns();
 
 			AddRows();
@@ -28,7 +30,6 @@ namespace WinFormsApp.Forms
 			{
 				dataGridView1.Columns.Add("student", "ФИО");
 
-				var currentDate = DateTime.Now;
 				for (var i = -16; i <= 1; i++)
 				{
 					var date = currentDate.AddDays(i);
@@ -38,9 +39,20 @@ namespace WinFormsApp.Forms
 
 			void AddRows()
 			{
-				var schedules = dbContext.Schedules.ToList();
+				var schedules = dbContext.Schedules
+					.Include(x => x.Student)
+					.Where(x => x.DateOfLesson >= currentDate.AddDays(-14) && x.DateOfLesson <= currentDate.AddDays(1))
+					.ToList();
 
-				var students = dbContext.Students.ToList();
+				var students = new List<Student>();
+				students = schedules.Select(x => x.Student).Distinct().ToList();
+
+				foreach (var schedule in schedules)
+				{
+
+				}
+
+
 
 				foreach(var student in students)
 				{
