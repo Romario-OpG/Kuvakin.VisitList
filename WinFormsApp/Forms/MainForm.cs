@@ -42,12 +42,19 @@ namespace WinFormsApp.Forms
 						student.LastName,
 						student.FirstName,
 						student.MiddleName,
-						student.DateOfBirth
+						student.DateOfBirth.ToString("dd.MM.yyyy")
 					};
 
 					dataGridView1.Rows.Add(values);
 				}
 			}
+		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			var form = new ScheduleForm();
+
+			form.ShowDialog();
 		}
 	}
 }
