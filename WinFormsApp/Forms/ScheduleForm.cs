@@ -38,20 +38,32 @@ namespace WinFormsApp.Forms
 
 			void AddRows()
 			{
-				var schedules = dbContext.Schedules
-					.Include(x => x.Student)
-					.ToList();
+				var schedules = dbContext.Schedules.ToList();
 
-				foreach (var schedule in schedules)
+				var students = dbContext.Students.ToList();
+
+				foreach(var student in students)
 				{
-					var FIO = $"{schedule.Student.LastName} {schedule.Student.FirstName} {schedule.Student.MiddleName}";
+					var fio = $"{student.LastName} {student.FirstName} {student.MiddleName}";
 
-					var values = new object[]
+					var values = new List<object>()
 					{
-						FIO
+						fio
 					};
 
-					dataGridView1.Rows.Add(values);
+					foreach(var schedul in schedules)
+					{
+						if(schedul.StudentId == student.Id)
+						{
+							values.Add("Да");
+						}
+						else
+						{
+							values.Add("Нет");
+						}
+					}
+
+					dataGridView1.Rows.Add(values.ToArray());
 				}
 			}
 		}
