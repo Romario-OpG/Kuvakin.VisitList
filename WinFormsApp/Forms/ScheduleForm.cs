@@ -34,7 +34,14 @@ namespace WinFormsApp.Forms
 			for (var i = MinRange; i <= MaxRange; i++)
 			{
 				var date = currentDate.AddDays(i);
-				dataGridView1.Columns.Add($"day[i]", date.ToString("dd.MM.yyyy"));
+
+				DataGridViewCheckBoxColumn column = new DataGridViewCheckBoxColumn();
+				{
+					column.CellTemplate = new DataGridViewCheckBoxCell();
+					column.HeaderText = date.ToString("dd.MM.yyyy");
+				}
+
+				dataGridView1.Columns.Add(column);
 			}
 		}
 
@@ -60,11 +67,11 @@ namespace WinFormsApp.Forms
 					var date = currentDate.AddDays(i);
 					if (schedule.FirstOrDefault(x => x.DateOfLesson.Date == date.Date) != null)
 					{
-						values.Add("Да");
+						values.Add(true);
 					}
 					else
 					{
-						values.Add("Нет");
+						values.Add(false);
 					}
 				}
 
