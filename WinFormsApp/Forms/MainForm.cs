@@ -30,7 +30,6 @@ namespace WinFormsApp.Forms
 				dataGridView1.Columns.Add("middle_name", "Отчество");
 				dataGridView1.Columns.Add("date_of_birth", "Дата рождения");
 			}
-
 			void AddRows()
 			{
 				var students = dbContext.Students.ToList();
@@ -69,5 +68,11 @@ namespace WinFormsApp.Forms
 			var form = new DeleteForm();
 			form.ShowDialog();
 		}
-	}
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+			var form = new ChangeForm();
+			form.ShowDialog();
+        }
+    }
 }

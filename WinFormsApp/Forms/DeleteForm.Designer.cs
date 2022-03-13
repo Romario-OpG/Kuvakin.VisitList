@@ -29,39 +29,41 @@ namespace WinFormsApp.Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.label1 = new System.Windows.Forms.Label();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.SuspendLayout();
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.label1.Location = new System.Drawing.Point(12, 9);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(223, 19);
-			this.label1.TabIndex = 0;
-			this.label1.Text = "Укажите Id ученика для удаления";
-			// 
-			// textBox1
-			// 
-			this.textBox1.Location = new System.Drawing.Point(241, 9);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.PlaceholderText = "Id";
-			this.textBox1.Size = new System.Drawing.Size(100, 23);
-			this.textBox1.TabIndex = 1;
-			// 
-			// DeleteForm
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(398, 153);
-			this.Controls.Add(this.textBox1);
-			this.Controls.Add(this.label1);
-			this.Name = "DeleteForm";
-			this.Text = "DeleteForm";
-			this.ResumeLayout(false);
-			this.PerformLayout();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(223, 19);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Укажите Id ученика для удаления";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(241, 9);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.PlaceholderText = "Id";
+            this.textBox1.Size = new System.Drawing.Size(100, 23);
+            this.textBox1.TabIndex = 1;
+            // 
+            // DeleteForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.PowderBlue;
+            this.ClientSize = new System.Drawing.Size(398, 153);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Name = "DeleteForm";
+            this.Text = "Удаление обучающегося";
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 
