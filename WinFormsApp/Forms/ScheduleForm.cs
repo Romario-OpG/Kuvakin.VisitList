@@ -25,9 +25,16 @@ namespace WinFormsApp.Forms
 			AddColumns();
 
 			AddRows();
+
+            dataGridView1.CellContentClick += this.DataGridView1_CellValueChanged;
 		}
 
-		private void AddColumns()
+        private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+			MessageBox.Show(sender.GetType().FullName);
+        }
+
+        private void AddColumns()
 		{
 			dataGridView1.Columns.Add("student", "ФИО");
 

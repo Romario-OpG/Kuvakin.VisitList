@@ -1,12 +1,6 @@
 ﻿using Database;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WinFormsApp.Forms
@@ -15,9 +9,20 @@ namespace WinFormsApp.Forms
     {
         private readonly AppDbContext dbContext = new();
 
-        public ChangeForm()
+        private readonly short studentId;
+
+        public ChangeForm(short studentId)
         {
             InitializeComponent();
+
+            this.studentId = studentId;
+
+            var student = dbContext.Students.FirstOrDefault(x => x.Id == studentId);
+
+            textBox3.Text = student.LastName;
+            textBox2.Text = student.FirstName;
+            textBox5.Text = student.MiddleName;
+            textBox1.Text = student.DateOfBirth.ToString("dd.MM.yyyy");
 
             comboBox1.DataSource = dbContext.Students.ToList();
             comboBox1.DisplayMember = "FullName";
@@ -37,6 +42,8 @@ namespace WinFormsApp.Forms
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            // исправить под fluent validation
+
             string LastName;
             try
             {
