@@ -80,5 +80,10 @@ namespace WinFormsApp.Forms
             var studentId = (short)currentRow.Cells["id"].Value;
             return studentId;
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Приложение для учета посещаемости помогает участникам образовательной ситемы удобнее следить за посещаемостью обучающихся");
+        }
     }
 }
