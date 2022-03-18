@@ -1,4 +1,5 @@
 ﻿using Database;
+using Database.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,12 +27,32 @@ namespace WinFormsApp.Forms
 
 			AddRows();
 
-            dataGridView1.CellContentClick += this.DataGridView1_CellValueChanged;
+            dataGridView1.CellValueChanged += DataGridView1_CellValueChanged;
 		}
 
-        private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private async void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-			MessageBox.Show(sender.GetType().FullName);
+			MessageBox.Show(currentDate.AddDays(e.ColumnIndex - 15).Date.ToString());
+			string[] s = dataGridView1[0, e.RowIndex].Value.ToString().Split();
+			var shedule = new Schedule()
+			{
+				Student = dbContext.Students.FirstOrDefault(x => x.LastName == s[0] && x.FirstName == s[1] && x.MiddleName == s[2]),
+				StudentId = dbContext.Students.FirstOrDefault(x => x.LastName == s[0] && x.FirstName == s[1] && x.MiddleName == s[2]).Id,
+				DateOfLesson = currentDate.AddDays(e.ColumnIndex - 15).Date
+			};
+
+            try
+            {
+				await dbContext.Schedules.AddAsync(shedule);
+				await dbContext.SaveChangesAsync();
+
+			}
+            catch (Exception)
+            {
+				MessageBox.Show("Не удалось сделать запись в базу данных");
+
+				return;
+            }
         }
 
         private void AddColumns()
@@ -56,7 +77,7 @@ namespace WinFormsApp.Forms
 		{
 			var schedules = dbContext.Schedules
 				.Include(x => x.Student)
-				.Where(x => x.DateOfLesson >= currentDate.AddDays(MinRange) && x.DateOfLesson <= currentDate.AddDays(MaxRange))
+				.Where(x => x.DateOfLesson.Date >= currentDate.AddDays(MinRange).Date && x.DateOfLesson.Date <= currentDate.AddDays(MaxRange).Date)
 				.OrderBy(x => x.DateOfLesson)
 				.ToList();
 
@@ -65,7 +86,7 @@ namespace WinFormsApp.Forms
 			{
 				var values = new List<object>()
 				{
-					$"Жмых пожiлой {student.ToFullName()}"
+					student.ToFullName()
 				};
 
 				var schedule = schedules.Where(x => x.StudentId == student.Id);
