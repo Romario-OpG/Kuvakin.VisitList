@@ -32,7 +32,6 @@ namespace WinFormsApp.Forms
 
         private async void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-			MessageBox.Show(currentDate.AddDays(e.ColumnIndex - 15).Date.ToString());
 			string[] s = dataGridView1[0, e.RowIndex].Value.ToString().Split();
 			var shedule = new Schedule()
 			{
