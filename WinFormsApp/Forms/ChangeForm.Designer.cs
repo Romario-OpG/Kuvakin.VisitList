@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.PaleGreen;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(330, 11);
+            this.button1.Location = new System.Drawing.Point(224, 41);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 0;
@@ -48,26 +48,17 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(330, 41);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "Новая дата рождения";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 1;
-            // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(118, 41);
+            this.textBox2.Location = new System.Drawing.Point(118, 12);
             this.textBox2.Name = "textBox2";
             this.textBox2.PlaceholderText = "Новое имя";
             this.textBox2.Size = new System.Drawing.Size(100, 23);
             this.textBox2.TabIndex = 2;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(12, 41);
+            this.textBox3.Location = new System.Drawing.Point(12, 12);
             this.textBox3.Name = "textBox3";
             this.textBox3.PlaceholderText = "Новая Фамилия";
             this.textBox3.Size = new System.Drawing.Size(100, 23);
@@ -75,20 +66,27 @@
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(224, 41);
+            this.textBox5.Location = new System.Drawing.Point(224, 12);
             this.textBox5.Name = "textBox5";
             this.textBox5.PlaceholderText = "Новое отчество";
             this.textBox5.Size = new System.Drawing.Size(100, 23);
             this.textBox5.TabIndex = 5;
             // 
-            // comboBox1
+            // dateTimePicker1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(206, 23);
-            this.comboBox1.TabIndex = 6;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
+            this.dateTimePicker1.Location = new System.Drawing.Point(12, 41);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(206, 23);
+            this.dateTimePicker1.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 15);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Новая дата рождения";
             // 
             // ChangeForm
             // 
@@ -96,12 +94,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.PowderBlue;
-            this.ClientSize = new System.Drawing.Size(442, 206);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(336, 91);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ChangeForm";
@@ -114,10 +112,10 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Label label1;
     }
 }

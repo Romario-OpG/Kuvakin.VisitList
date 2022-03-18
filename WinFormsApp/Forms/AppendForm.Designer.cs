@@ -33,17 +33,17 @@ namespace WinFormsApp.Forms
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.PaleGreen;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(437, 11);
+            this.button1.Location = new System.Drawing.Point(452, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(70, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Добавить";
             this.button1.UseVisualStyleBackColor = false;
@@ -73,33 +73,31 @@ namespace WinFormsApp.Forms
             this.textBox3.Size = new System.Drawing.Size(100, 23);
             this.textBox3.TabIndex = 3;
             // 
-            // textBox4
-            // 
-            this.textBox4.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox4.Location = new System.Drawing.Point(331, 11);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.PlaceholderText = "Дата рождения";
-            this.textBox4.Size = new System.Drawing.Size(100, 23);
-            this.textBox4.TabIndex = 4;
-            // 
             // richTextBox1
             // 
             this.richTextBox1.BackColor = System.Drawing.SystemColors.Window;
             this.richTextBox1.Location = new System.Drawing.Point(12, 41);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(500, 96);
+            this.richTextBox1.Size = new System.Drawing.Size(510, 96);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "";
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(330, 12);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(116, 23);
+            this.dateTimePicker1.TabIndex = 6;
             // 
             // AppendForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PowderBlue;
-            this.ClientSize = new System.Drawing.Size(530, 149);
+            this.ClientSize = new System.Drawing.Size(534, 149);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -118,7 +116,7 @@ namespace WinFormsApp.Forms
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.TextBox textBox2;
 		private System.Windows.Forms.TextBox textBox3;
-		private System.Windows.Forms.TextBox textBox4;
 		private System.Windows.Forms.RichTextBox richTextBox1;
-	}
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+    }
 }

@@ -22,95 +22,42 @@ namespace WinFormsApp.Forms
             textBox3.Text = student.LastName;
             textBox2.Text = student.FirstName;
             textBox5.Text = student.MiddleName;
-            textBox1.Text = student.DateOfBirth.ToString("dd.MM.yyyy");
-
-            comboBox1.DataSource = dbContext.Students.ToList();
-            comboBox1.DisplayMember = "FullName";
-            comboBox1.ValueMember = "Id";
-
-            comboBox1.SelectedIndexChanged += ComboBox1_SelectedIndexChanged;
-        }
-
-        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
+            dateTimePicker1.Value = student.DateOfBirth;
         }
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            // исправить под fluent validation
-
-            string LastName;
-            try
+            TextBoxModel textBoxModel = new()
             {
-                if (string.IsNullOrWhiteSpace(textBox3.Text)) { throw new ArgumentNullException(); }
-                else { LastName = textBox3.Text; }
-            }
-            catch (ArgumentNullException)
-            {
-                MessageBox.Show("Введите Фамилию.");
+                LastNameTB = textBox3,
+                FirstNameTB = textBox2,
+                MiddleNameTB = textBox5,
+            };
 
-                textBox3.Focus();
+            TextBoxValidator validator = new();
+            if (validator.Validate(textBoxModel).IsValid == false)
+            {
+                string errors = "";
+                foreach (var eror in validator.Validate(textBoxModel).Errors.Select(x => x.ErrorMessage))
+                {
+                    errors += eror;
+                }
+                MessageBox.Show(errors);
+
                 return;
             }
-
-            string FirstName;
-            try
+            else
             {
-                if (string.IsNullOrWhiteSpace(textBox2.Text)) { throw new ArgumentNullException(); }
-                else { FirstName = textBox2.Text; }
+                var student = dbContext.Students.FirstOrDefault(x => x.Id == studentId);
+                student.LastName = textBoxModel.LastNameTB.Text;
+                student.FirstName = textBoxModel.FirstNameTB.Text;
+                student.MiddleName = textBoxModel.MiddleNameTB.Text;
+                student.DateOfBirth = dateTimePicker1.Value.Date;
+
+                await dbContext.SaveChangesAsync();
+
+                MessageBox.Show("Изменение прошло успешно");
             }
-            catch (ArgumentNullException)
-            {
-                MessageBox.Show("Введите имя.");
-
-                textBox2.Focus();
-                return;
-            }
-
-            string MiddleName;
-            try
-            {
-                if (string.IsNullOrWhiteSpace(textBox5.Text)) { throw new ArgumentNullException(); }
-                else { MiddleName = textBox5.Text; }
-            }
-            catch (ArgumentNullException)
-            {
-                MessageBox.Show("Введите имя.");
-
-                textBox5.Focus();
-                return;
-            }
-
-            DateTime birthday;
-            try
-            {
-                if (DateTime.Parse(textBox1.Text) >= DateTime.Now) { throw new FormatException(); }
-
-                birthday = DateTime.Parse(textBox1.Text);
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Введите корректное значение даты рождения.");
-
-                textBox1.Clear();
-                textBox1.Focus();
-                return;
-            }
-
-            /*
-            var student = dbContext.Students.FirstOrDefault(x => x.Id == id);
-            student.LastName = LastName;
-            student.FirstName = FirstName;
-            student.MiddleName = MiddleName;
-            student.DateOfBirth = birthday;
-            */
-
-            await dbContext.SaveChangesAsync();
         }
     }
 }
