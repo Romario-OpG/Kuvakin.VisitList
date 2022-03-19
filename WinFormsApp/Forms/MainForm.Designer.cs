@@ -31,13 +31,12 @@ namespace WinFormsApp.Forms
 		{
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +62,6 @@ namespace WinFormsApp.Forms
             // 
             this.panel1.BackColor = System.Drawing.Color.PowderBlue;
             this.panel1.Controls.Add(this.button7);
-            this.panel1.Controls.Add(this.button6);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
@@ -74,22 +72,23 @@ namespace WinFormsApp.Forms
             this.panel1.Size = new System.Drawing.Size(200, 455);
             this.panel1.TabIndex = 1;
             // 
-            // button6
+            // button7
             // 
-            this.button6.BackColor = System.Drawing.Color.PaleGreen;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(14, 411);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(174, 31);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "Выйти";
-            this.button6.UseVisualStyleBackColor = false;
+            this.button7.BackColor = System.Drawing.Color.PaleGreen;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Location = new System.Drawing.Point(14, 337);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(174, 31);
+            this.button7.TabIndex = 6;
+            this.button7.Text = "Обновить";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.PaleGreen;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(14, 375);
+            this.button5.Location = new System.Drawing.Point(14, 411);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(174, 31);
             this.button5.TabIndex = 4;
@@ -101,7 +100,7 @@ namespace WinFormsApp.Forms
             // 
             this.button4.BackColor = System.Drawing.Color.PaleGreen;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(14, 338);
+            this.button4.Location = new System.Drawing.Point(14, 374);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(174, 31);
             this.button4.TabIndex = 3;
@@ -145,18 +144,6 @@ namespace WinFormsApp.Forms
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.PaleGreen;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(14, 127);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(174, 31);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "Обновить";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -178,7 +165,6 @@ namespace WinFormsApp.Forms
 
 		private System.Windows.Forms.DataGridView dataGridView1;
 		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.Button button6;
 		private System.Windows.Forms.Button button5;
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.Button button3;
