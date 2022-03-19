@@ -14,7 +14,6 @@ namespace WinFormsApp.Forms
             InitializeComponent();
 
             AddColumns();
-            AddRows();
 
             void AddColumns()
             {
@@ -24,23 +23,8 @@ namespace WinFormsApp.Forms
                 dataGridView1.Columns.Add("middle_name", "Отчество");
                 dataGridView1.Columns.Add("date_of_birth", "Дата рождения");
             }
-            void AddRows()
-            {
-                var students = dbContext.Students.ToList();
-                foreach (var student in students)
-                {
-                    var values = new object[]
-                    {
-                        student.Id,
-                        student.LastName,
-                        student.FirstName,
-                        student.MiddleName,
-                        student.DateOfBirth.ToString("dd.MM.yyyy")
-                    };
 
-                    dataGridView1.Rows.Add(values);
-                }
-            }
+            UpdateRows();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -84,6 +68,31 @@ namespace WinFormsApp.Forms
         private void button5_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Приложение для учета посещаемости помогает участникам образовательной ситемы удобнее следить за посещаемостью обучающихся");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            UpdateRows();
+        }
+
+        private void UpdateRows()
+        {
+            dataGridView1.Rows.Clear();
+
+            var students = dbContext.Students.ToList();
+            foreach (var student in students)
+            {
+                var values = new object[]
+                {
+                        student.Id,
+                        student.LastName,
+                        student.FirstName,
+                        student.MiddleName,
+                        student.DateOfBirth.ToString("dd.MM.yyyy")
+                };
+
+                dataGridView1.Rows.Add(values);
+            }
         }
     }
 }
