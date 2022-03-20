@@ -23,7 +23,7 @@ namespace WinFormsApp.Forms
         {
             InitializeComponent();
 
-            AddColumns();
+            /*AddColumns();
 
             var schedules = await dbContext.Schedules
                 .Where(x =>
@@ -34,7 +34,7 @@ namespace WinFormsApp.Forms
 
             var students = await dbContext.Students.ToListAsync();
 
-            AddRows();
+            AddRows();*/
 
             dataGridView1.CellValueChanged += DataGridView1_CellValueChanged;
         }

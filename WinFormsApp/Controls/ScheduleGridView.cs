@@ -20,7 +20,7 @@ namespace WinFormsApp.Controls
             this.currentDate = currentDate;
         }
 
-        public IEnumerable<DataGridViewColumn> GetColumns(DateTime currentDate)
+        public IEnumerable<DataGridViewColumn> GetColumns()
         {
             var columns = new List<DataGridViewColumn>
             {
@@ -32,8 +32,9 @@ namespace WinFormsApp.Controls
             {
                 var column = new DataGridViewCheckBoxColumn();
                 {
-                    column.Name = currentDate.ToString("dd.MM.yyyy");
-                    column.HeaderText = currentDate.ToString("yyyy-MM-dd");
+                    var date = currentDate.AddDays(i);
+                    column.Name = date.ToString("dd.MM.yyyy");
+                    column.HeaderText = date.ToString("yyyy-MM-dd");
                     column.CellTemplate = new DataGridViewCheckBoxCell();
                 }
 
