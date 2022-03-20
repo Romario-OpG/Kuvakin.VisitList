@@ -1,11 +1,8 @@
 ﻿using Database;
-using Database.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using WinFormsApp.Controls;
 
 namespace WinFormsApp.Forms
 {
@@ -23,20 +20,25 @@ namespace WinFormsApp.Forms
         {
             InitializeComponent();
 
-            /*AddColumns();
-
-            var schedules = await dbContext.Schedules
-                .Where(x =>
-                    x.DateOfLesson.Date >= currentDate.AddDays(minRange).Date &&
-                    x.DateOfLesson.Date <= currentDate.AddDays(maxRange).Date)
-                .OrderBy(x => x.DateOfLesson)
-                .ToListAsync();
-
-            var students = await dbContext.Students.ToListAsync();
-
-            AddRows();*/
-
             dataGridView1.CellValueChanged += DataGridView1_CellValueChanged;
+
+            // new code:
+            var schedules = dbContext.Schedules
+                .Where(x =>
+                    x.DateOfLesson.Date >= currentDate.AddDays(MinRange).Date &&
+                    x.DateOfLesson.Date <= currentDate.AddDays(MaxRange).Date)
+                .OrderBy(x => x.DateOfLesson)
+                .ToList();
+
+            var students = dbContext.Students.ToList();
+
+            var scheduleGridView = new ScheduleGridView(MinRange, MaxRange, currentDate);
+            
+            var columns = scheduleGridView.GetColumns();
+            dataGridView1.Columns.AddRange(columns.ToArray());
+
+            var rows = scheduleGridView.GetRows(schedules, students);
+            dataGridView1.Rows.AddRange(rows.ToArray());
         }
 
         private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs eventArgs)

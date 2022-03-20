@@ -48,6 +48,7 @@ namespace WinFormsApp.Controls
                 var column = new DataGridViewColumn();
                 column.Name = "Id";
                 column.HeaderText = "id";
+                column.CellTemplate = new DataGridViewTextBoxCell();
 
                 return column;
             }
@@ -57,6 +58,7 @@ namespace WinFormsApp.Controls
                 var column = new DataGridViewColumn();
                 column.Name = "Фамилия Имя Отчество";
                 column.HeaderText = "full_name";
+                column.CellTemplate = new DataGridViewTextBoxCell();
 
                 return column;
             }
