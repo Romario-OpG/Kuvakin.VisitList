@@ -29,9 +29,9 @@ namespace WinFormsApp.Forms
         {
             TextBoxModel textBoxModel = new()
             {
-                LastNameTB = textBox3,
-                FirstNameTB = textBox2,
-                MiddleNameTB = textBox5,
+                LastName = textBox3,
+                FirstName = textBox2,
+                MiddleName = textBox5,
             };
 
             TextBoxValidator validator = new();
@@ -49,9 +49,9 @@ namespace WinFormsApp.Forms
             else
             {
                 var student = dbContext.Students.FirstOrDefault(x => x.Id == studentId);
-                student.LastName = textBoxModel.LastNameTB.Text;
-                student.FirstName = textBoxModel.FirstNameTB.Text;
-                student.MiddleName = textBoxModel.MiddleNameTB.Text;
+                student.LastName = textBoxModel.LastName.Text;
+                student.FirstName = textBoxModel.FirstName.Text;
+                student.MiddleName = textBoxModel.MiddleName.Text;
                 student.DateOfBirth = dateTimePicker1.Value.Date;
 
                 await dbContext.SaveChangesAsync();

@@ -9,11 +9,11 @@ namespace WinFormsApp.Forms
 {
     internal class TextBoxModel
     {
-        public TextBox LastNameTB { get; set; }
+        public TextBox LastName { get; set; }
 
-        public TextBox FirstNameTB { get; set; }
+        public TextBox FirstName { get; set; }
 
-        public TextBox MiddleNameTB { get; set; }
+        public TextBox MiddleName { get; set; }
 
     }
 }

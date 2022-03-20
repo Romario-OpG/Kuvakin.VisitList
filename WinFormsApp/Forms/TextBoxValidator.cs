@@ -11,11 +11,11 @@ namespace WinFormsApp.Forms
     {
         public TextBoxValidator()
         {
-            RuleFor(x => x.LastNameTB.Text).NotNull().NotEmpty().WithMessage("Введите фамилию\n");
+            RuleFor(x => x.LastName.Text).NotNull().NotEmpty().WithMessage("Введите фамилию");
 
-            RuleFor(x => x.FirstNameTB.Text).NotNull().NotEmpty().WithMessage("Введите имя\n");
+            RuleFor(x => x.FirstName.Text).NotNull().NotEmpty().WithMessage("Введите имя");
 
-            RuleFor(x => x.MiddleNameTB.Text).NotNull().NotEmpty().WithMessage("Введите отчество\n");
+            RuleFor(x => x.MiddleName.Text).NotNull().NotEmpty().WithMessage("Введите отчество");
         }
     }
 }

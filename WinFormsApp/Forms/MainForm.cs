@@ -75,7 +75,7 @@ namespace WinFormsApp.Forms
             UpdateRows();
         }
 
-        private void UpdateRows()
+        public void UpdateRows()
         {
             dataGridView1.Rows.Clear();
 

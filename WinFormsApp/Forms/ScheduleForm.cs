@@ -56,6 +56,7 @@ namespace WinFormsApp.Forms
 
         private void AddColumns()
         {
+            dataGridView1.Columns.Add("Id", "Id");
             dataGridView1.Columns.Add("student", "ФИО");
 
             for (var i = MinRange; i <= MaxRange; i++)
@@ -85,6 +86,7 @@ namespace WinFormsApp.Forms
             {
                 var values = new List<object>()
                 {
+                    student.Id,
                     student.ToFullName()
                 };
 

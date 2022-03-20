@@ -25,9 +25,9 @@ namespace WinFormsApp.Forms
         {
             TextBoxModel textBoxModel = new()
             {
-                LastNameTB = textBox1,
-                FirstNameTB = textBox2,
-                MiddleNameTB = textBox3,
+                LastName = textBox1,
+                FirstName = textBox2,
+                MiddleName = textBox3,
             };
 
             TextBoxValidator validator = new();
@@ -46,9 +46,9 @@ namespace WinFormsApp.Forms
             {
                 var student = new Student()
                 {
-                    LastName = textBoxModel.LastNameTB.Text,
-                    FirstName = textBoxModel.FirstNameTB.Text,
-                    MiddleName = textBoxModel.MiddleNameTB.Text,
+                    LastName = textBoxModel.LastName.Text,
+                    FirstName = textBoxModel.FirstName.Text,
+                    MiddleName = textBoxModel.MiddleName.Text,
                     DateOfBirth = dateTimePicker1.Value.Date
                 };
 
@@ -62,7 +62,10 @@ namespace WinFormsApp.Forms
                     MessageBox.Show("Не удалось добавить ученика");
                 }
 
-                richTextBox1.Text += $"{DateTime.Now} Добавлен новый ученик: {textBoxModel.LastNameTB.Text} {textBoxModel.FirstNameTB.Text} {textBoxModel.MiddleNameTB.Text}\n";
+                richTextBox1.Text += $"{DateTime.Now} Добавлен новый ученик: {textBoxModel.LastName.Text} {textBoxModel.FirstName.Text} {textBoxModel.MiddleName.Text}\n";
+
+                var form = new MainForm();
+                form.UpdateRows();
             }
         }
     }
