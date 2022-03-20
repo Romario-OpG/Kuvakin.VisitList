@@ -1,11 +1,8 @@
 ﻿using Database;
-using Database.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
+using WinFormsApp.Controls;
 
 namespace WinFormsApp.Forms
 {
@@ -23,17 +20,33 @@ namespace WinFormsApp.Forms
         {
             InitializeComponent();
 
-            AddColumns();
-
-            AddRows();
-
             dataGridView1.CellValueChanged += DataGridView1_CellValueChanged;
+
+            // new code:
+            var schedules = dbContext.Schedules
+                .Where(x =>
+                    x.DateOfLesson.Date >= currentDate.AddDays(MinRange).Date &&
+                    x.DateOfLesson.Date <= currentDate.AddDays(MaxRange).Date)
+                .OrderBy(x => x.DateOfLesson)
+                .ToList();
+
+            var students = dbContext.Students.ToList();
+
+            var scheduleGridView = new ScheduleGridView(MinRange, MaxRange, currentDate);
+            
+            var columns = scheduleGridView.GetColumns();
+            dataGridView1.Columns.AddRange(columns.ToArray());
+
+            var rows = scheduleGridView.GetRows(schedules, students);
+            dataGridView1.Rows.AddRange(rows.ToArray());
         }
 
-        private async void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs eventArgs)
         {
-            string[] s = dataGridView1[0, e.RowIndex].Value.ToString().Split();
-            var shedule = new Schedule()
+            MessageBox.Show(GetStudentId().ToString());
+
+
+            /*var schedule = new Schedule()
             {
                 Student = dbContext.Students.FirstOrDefault(x => x.LastName == s[0] && x.FirstName == s[1] && x.MiddleName == s[2]),
                 StudentId = dbContext.Students.FirstOrDefault(x => x.LastName == s[0] && x.FirstName == s[1] && x.MiddleName == s[2]).Id,
@@ -42,7 +55,7 @@ namespace WinFormsApp.Forms
 
             try
             {
-                await dbContext.Schedules.AddAsync(shedule);
+                await dbContext.Schedules.AddAsync(schedule);
                 await dbContext.SaveChangesAsync();
 
             }
@@ -51,60 +64,12 @@ namespace WinFormsApp.Forms
                 MessageBox.Show("Не удалось сделать запись в базу данных");
 
                 return;
-            }
-        }
+            }*/
 
-        private void AddColumns()
-        {
-            dataGridView1.Columns.Add("Id", "Id");
-            dataGridView1.Columns.Add("student", "ФИО");
-
-            for (var i = MinRange; i <= MaxRange; i++)
+            short GetStudentId()
             {
-                var date = currentDate.AddDays(i);
-
-                DataGridViewCheckBoxColumn column = new DataGridViewCheckBoxColumn();
-                {
-                    column.CellTemplate = new DataGridViewCheckBoxCell();
-                    column.HeaderText = date.ToString("dd.MM.yyyy");
-                }
-
-                dataGridView1.Columns.Add(column);
-            }
-        }
-
-        private void AddRows()
-        {
-            var schedules = dbContext.Schedules
-                .Include(x => x.Student)
-                .Where(x => x.DateOfLesson.Date >= currentDate.AddDays(MinRange).Date && x.DateOfLesson.Date <= currentDate.AddDays(MaxRange).Date)
-                .OrderBy(x => x.DateOfLesson)
-                .ToList();
-
-            var students = dbContext.Students.ToList();
-            foreach (var student in students)
-            {
-                var values = new List<object>()
-                {
-                    student.Id,
-                    student.ToFullName()
-                };
-
-                var schedule = schedules.Where(x => x.StudentId == student.Id);
-                for (var i = MinRange; i <= MaxRange; i++)
-                {
-                    var date = currentDate.AddDays(i);
-                    if (schedule.FirstOrDefault(x => x.DateOfLesson.Date == date.Date) != null)
-                    {
-                        values.Add(true);
-                    }
-                    else
-                    {
-                        values.Add(false);
-                    }
-                }
-
-                dataGridView1.Rows.Add(values.ToArray());
+                var studentId = (short)dataGridView1["id", eventArgs.RowIndex].Value;
+                return studentId;
             }
         }
     }

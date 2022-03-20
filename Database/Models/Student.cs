@@ -20,10 +20,5 @@ namespace Database.Models
 
         [Column("date_of_birth")]
         public DateTime DateOfBirth { get; set; }
-
-        public string ToFullName()
-        {
-            return $"{LastName} {FirstName} {MiddleName}";
-        }
     }
 }
