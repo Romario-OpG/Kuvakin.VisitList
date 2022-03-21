@@ -33,8 +33,8 @@ namespace WinFormsApp.Controls
                 var column = new DataGridViewCheckBoxColumn();
                 {
                     var date = currentDate.AddDays(i);
-                    column.Name = date.ToString("dd.MM.yyyy");
-                    column.HeaderText = date.ToString("yyyy-MM-dd");
+                    column.Name = date.ToString("yyyy-MM-dd");
+                    column.HeaderText = date.ToString("dd.MM.yyyy");
                     column.CellTemplate = new DataGridViewCheckBoxCell();
                 }
 
@@ -46,8 +46,8 @@ namespace WinFormsApp.Controls
             DataGridViewColumn GetIdColumn()
             {
                 var column = new DataGridViewColumn();
-                column.Name = "Id";
-                column.HeaderText = "id";
+                column.Name = "id";
+                column.HeaderText = "Id";
                 column.CellTemplate = new DataGridViewTextBoxCell();
 
                 return column;
@@ -56,8 +56,8 @@ namespace WinFormsApp.Controls
             DataGridViewColumn GetFullNameColumn()
             {
                 var column = new DataGridViewColumn();
-                column.Name = "Фамилия Имя Отчество";
-                column.HeaderText = "full_name";
+                column.Name = "full_name";
+                column.HeaderText = "Фамилия Имя Отчество";
                 column.CellTemplate = new DataGridViewTextBoxCell();
 
                 return column;

@@ -1,5 +1,7 @@
 ﻿using Database;
+using Database.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using WinFormsApp.Controls;
@@ -41,10 +43,49 @@ namespace WinFormsApp.Forms
             dataGridView1.Rows.AddRange(rows.ToArray());
         }
 
-        private void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs eventArgs)
+        private async void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs eventArgs)
         {
-            MessageBox.Show(GetStudentId().ToString());
+            
 
+            short id = short.Parse(dataGridView1[0, eventArgs.RowIndex].Value.ToString());
+
+            if (bool.Parse(dataGridView1[eventArgs.ColumnIndex, eventArgs.RowIndex].Value.ToString()) == false)
+            {
+                var schedule = dbContext.Schedules.Where(x => x.StudentId == id);
+                try
+                {
+                    dbContext.Schedules.RemoveRange(schedule);
+                    await dbContext.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Не удалось сделать запись в базу данных");
+
+                    return;
+                }
+            }
+            else
+            {
+                var shedule = new Schedule()
+                {
+                    Student = dbContext.Students.FirstOrDefault(x => x.Id == id),
+                    StudentId = dbContext.Students.FirstOrDefault(x => x.Id == id).Id,
+                    DateOfLesson = currentDate.AddDays(eventArgs.ColumnIndex - 16).Date
+                };
+
+                try
+                {
+                    await dbContext.Schedules.AddAsync(shedule);
+                    await dbContext.SaveChangesAsync();
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Не удалось сделать запись в базу данных");
+
+                    return;
+                }
+            }
 
             /*var schedule = new Schedule()
             {
@@ -71,6 +112,10 @@ namespace WinFormsApp.Forms
                 var studentId = (short)dataGridView1["id", eventArgs.RowIndex].Value;
                 return studentId;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
         }
     }
 }
