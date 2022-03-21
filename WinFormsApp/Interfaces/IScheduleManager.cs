@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace WinFormsApp.Interfaces
 {
-    public interface IScheduleGridView
+    public interface IScheduleManager
     {
         public IEnumerable<DataGridViewColumn> GetColumns();
         public IEnumerable<DataGridViewRow> GetRows(IEnumerable<Schedule> schedules, IEnumerable<Student> students);

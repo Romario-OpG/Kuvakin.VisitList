@@ -7,13 +7,13 @@ using WinFormsApp.Interfaces;
 
 namespace WinFormsApp.Controls
 {
-    public class ScheduleGridView : IScheduleGridView
+    public class ScheduleManager : IScheduleManager
     {
         private readonly short minRange;
         private readonly short maxRange;
         private readonly DateTime currentDate;
 
-        public ScheduleGridView(short minRange, short maxRange, DateTime currentDate)
+        public ScheduleManager(short minRange, short maxRange, DateTime currentDate)
         {
             this.minRange = minRange;
             this.maxRange = maxRange;

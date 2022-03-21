@@ -34,7 +34,7 @@ namespace WinFormsApp.Forms
 
             var students = dbContext.Students.ToList();
 
-            var scheduleGridView = new ScheduleGridView(MinRange, MaxRange, currentDate);
+            var scheduleGridView = new ScheduleManager(MinRange, MaxRange, currentDate);
             
             var columns = scheduleGridView.GetColumns();
             dataGridView1.Columns.AddRange(columns.ToArray());
@@ -45,7 +45,8 @@ namespace WinFormsApp.Forms
 
         private async void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs eventArgs)
         {
-            
+            dataGridView1.Rows[];
+
 
             short id = short.Parse(dataGridView1[0, eventArgs.RowIndex].Value.ToString());
 
@@ -107,11 +108,7 @@ namespace WinFormsApp.Forms
                 return;
             }*/
 
-            short GetStudentId()
-            {
-                var studentId = (short)dataGridView1["id", eventArgs.RowIndex].Value;
-                return studentId;
-            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)

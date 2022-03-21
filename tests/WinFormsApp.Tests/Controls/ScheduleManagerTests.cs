@@ -6,13 +6,13 @@ using Xunit;
 
 namespace WinFormsApp.Tests.Controls
 {
-    public class ScheduleGridViewTests
+    public class ScheduleManagerTests
     {
         [Fact]
         public void GetColumns_ShouldBeSuccess()
         {
             // setup
-            var target = new ScheduleGridView(
+            var target = new ScheduleManager(
                 minRange: -1,
                 maxRange: 1,
                 currentDate: new DateTime(2021, 12, 31)
