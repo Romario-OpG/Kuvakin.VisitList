@@ -32,25 +32,44 @@ namespace WinFormsApp.Forms
 
         private async void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            string[] s = dataGridView1[0, e.RowIndex].Value.ToString().Split();
-            var shedule = new Schedule()
-            {
-                Student = dbContext.Students.FirstOrDefault(x => x.LastName == s[0] && x.FirstName == s[1] && x.MiddleName == s[2]),
-                StudentId = dbContext.Students.FirstOrDefault(x => x.LastName == s[0] && x.FirstName == s[1] && x.MiddleName == s[2]).Id,
-                DateOfLesson = currentDate.AddDays(e.ColumnIndex - 15).Date
-            };
+            short id = short.Parse(dataGridView1[0, e.RowIndex].Value.ToString());
 
-            try
+            if (bool.Parse(dataGridView1[e.ColumnIndex, e.RowIndex].Value.ToString()) == false)
             {
-                await dbContext.Schedules.AddAsync(shedule);
-                await dbContext.SaveChangesAsync();
+                var schedule = dbContext.Schedules.Where(x => x.StudentId == id);
+                try
+                {
+                    dbContext.Schedules.RemoveRange(schedule);
+                    await dbContext.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Не удалось сделать запись в базу данных");
 
+                    return;
+                }
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show("Не удалось сделать запись в базу данных");
+                var shedule = new Schedule()
+                {
+                    Student = dbContext.Students.FirstOrDefault(x => x.Id == id),
+                    StudentId = dbContext.Students.FirstOrDefault(x => x.Id == id).Id,
+                    DateOfLesson = currentDate.AddDays(e.ColumnIndex - 16).Date
+                };
 
-                return;
+                try
+                {
+                    await dbContext.Schedules.AddAsync(shedule);
+                    await dbContext.SaveChangesAsync();
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Не удалось сделать запись в базу данных");
+
+                    return;
+                }
             }
         }
 
