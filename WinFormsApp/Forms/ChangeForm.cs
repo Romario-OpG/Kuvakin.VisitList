@@ -54,6 +54,7 @@ namespace WinFormsApp.Forms
                 student.MiddleName = textBoxModel.MiddleName.Text;
                 student.DateOfBirth = dateTimePicker1.Value.Date;
 
+                dbContext.Students.Update(student);
                 await dbContext.SaveChangesAsync();
 
                 MessageBox.Show("Изменение прошло успешно");

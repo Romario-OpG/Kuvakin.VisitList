@@ -7,8 +7,6 @@ namespace WinFormsApp.Forms
 {
     public partial class MainForm : Form
     {
-        private readonly AppDbContext dbContext = new();
-
         public MainForm()
         {
             InitializeComponent();
@@ -78,6 +76,8 @@ namespace WinFormsApp.Forms
         public void UpdateRows()
         {
             dataGridView1.Rows.Clear();
+
+            AppDbContext dbContext = new();
 
             var students = dbContext.Students.ToList();
             foreach (var student in students)

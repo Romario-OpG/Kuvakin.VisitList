@@ -32,12 +32,13 @@ namespace WinFormsApp.Forms
 
         private async void DataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            short id = short.Parse(dataGridView1[0, e.RowIndex].Value.ToString());
+            short id;
 
             bool value;
             try
             {
-                if(bool.Parse(dataGridView1[e.ColumnIndex, e.RowIndex].Value?.ToString()) == false){ value = false; }
+                id = short.Parse(dataGridView1[0, e.RowIndex].Value?.ToString());
+                if (bool.Parse(dataGridView1[e.ColumnIndex, e.RowIndex].Value?.ToString()) == false){ value = false; }
                 else { value = true; }
             }
             catch (Exception)
@@ -45,7 +46,7 @@ namespace WinFormsApp.Forms
                 dataGridView1.Rows.Clear();
                 AddRows();
 
-                MessageBox.Show("Не изменяйте значение посещаемости вручную");
+                MessageBox.Show("Не изменяйте значения вручную.");
 
                 return;
             }
