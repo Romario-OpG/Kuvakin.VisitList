@@ -34,9 +34,25 @@ namespace WinFormsApp.Forms
         {
             short id = short.Parse(dataGridView1[0, e.RowIndex].Value.ToString());
 
-            if (bool.Parse(dataGridView1[e.ColumnIndex, e.RowIndex].Value.ToString()) == false)
+            bool value;
+            try
             {
-                var schedule = dbContext.Schedules.Where(x => x.StudentId == id);
+                if(bool.Parse(dataGridView1[e.ColumnIndex, e.RowIndex].Value?.ToString()) == false){ value = false; }
+                else { value = true; }
+            }
+            catch (Exception)
+            {
+                dataGridView1.Rows.Clear();
+                AddRows();
+
+                MessageBox.Show("Не изменяйте значение посещаемости вручную");
+
+                return;
+            }
+
+            if (value == false)
+            {
+                var schedule = dbContext.Schedules.Where(x => x.StudentId == id && x.DateOfLesson.Date == currentDate.AddDays(e.ColumnIndex - 17).Date);
                 try
                 {
                     dbContext.Schedules.RemoveRange(schedule);
@@ -55,7 +71,7 @@ namespace WinFormsApp.Forms
                 {
                     Student = dbContext.Students.FirstOrDefault(x => x.Id == id),
                     StudentId = dbContext.Students.FirstOrDefault(x => x.Id == id).Id,
-                    DateOfLesson = currentDate.AddDays(e.ColumnIndex - 16).Date
+                    DateOfLesson = currentDate.AddDays(e.ColumnIndex - 17).Date
                 };
 
                 try
@@ -64,7 +80,7 @@ namespace WinFormsApp.Forms
                     await dbContext.SaveChangesAsync();
 
                 }
-                catch (Exception)
+                catch (NullReferenceException)
                 {
                     MessageBox.Show("Не удалось сделать запись в базу данных");
 
@@ -73,10 +89,13 @@ namespace WinFormsApp.Forms
             }
         }
 
+
+
         private void AddColumns()
         {
             dataGridView1.Columns.Add("Id", "Id");
             dataGridView1.Columns.Add("student", "ФИО");
+            dataGridView1.Columns.Add("proportion", "Посещаемость");
 
             for (var i = MinRange; i <= MaxRange; i++)
             {
@@ -92,13 +111,14 @@ namespace WinFormsApp.Forms
             }
         }
 
-        private void AddRows()
+        private async void AddRows()
         {
-            var schedules = dbContext.Schedules
-                .Include(x => x.Student)
-                .Where(x => x.DateOfLesson.Date >= currentDate.AddDays(MinRange).Date && x.DateOfLesson.Date <= currentDate.AddDays(MaxRange).Date)
-                .OrderBy(x => x.DateOfLesson)
-                .ToList();
+            double proportion = 0;
+
+            var schedules = await dbContext.Schedules
+           .Where(x => x.DateOfLesson.Date >= currentDate.AddDays(MinRange).Date && x.DateOfLesson.Date <= currentDate.AddDays(MaxRange).Date)
+           .OrderBy(x => x.DateOfLesson)
+           .ToListAsync();
 
             var students = dbContext.Students.ToList();
             foreach (var student in students)
@@ -115,6 +135,19 @@ namespace WinFormsApp.Forms
                     var date = currentDate.AddDays(i);
                     if (schedule.FirstOrDefault(x => x.DateOfLesson.Date == date.Date) != null)
                     {
+                        proportion++;
+                    }
+                    else
+                    {
+                    }
+                }
+                values.Add($"{proportion / 16 * 100}%");
+
+                for (var i = MinRange; i <= MaxRange; i++)
+                {
+                    var date = currentDate.AddDays(i);
+                    if (schedule.FirstOrDefault(x => x.DateOfLesson.Date == date.Date) != null)
+                    {
                         values.Add(true);
                     }
                     else
@@ -124,7 +157,14 @@ namespace WinFormsApp.Forms
                 }
 
                 dataGridView1.Rows.Add(values.ToArray());
+                proportion = 0;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            AddRows();
         }
     }
 }
