@@ -46,7 +46,7 @@ namespace WinFormsApp.Forms
                 dataGridView1.Rows.Clear();
                 AddRows();
 
-                MessageBox.Show("Не изменяйте значения вручную.");
+                MessageBox.Show("Не изменяйте значения вручную");
 
                 return;
             }
